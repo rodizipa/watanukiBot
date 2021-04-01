@@ -43,7 +43,7 @@ class Bot(commands.Bot):
                     april_cog = await self.get_april_cog()
                     await april_cog.watanuki_primeiro_de_abril(guild=self.get_guild(guild['guild_id']))
                     await self.guildservice.update_time(guild['guild_id'], pendulum_to_datetime(
-                        pendulum.now().add(CONFIG.TIME_INCREMENT_IN_MINUTES)))
+                        pendulum.now().add(minutes=CONFIG.TIME_INCREMENT_IN_MINUTES)))
             await asyncio.sleep(60)
 
     @property
