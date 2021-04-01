@@ -283,6 +283,7 @@ class PrimeiroAbrilCog(commands.Cog):
     async def restore_members(self, ctx):
         """Restaura nome dos usuários salvos no banco anteriormente"""
         membros = await self.bot.memberservice.get_all_members(ctx.guild.id)
+        await self.bot.guildservice.update_guild_online(ctx.guild.id, False)
 
         for member in membros:
             await change_member_nick(member['member_id'], member['display_name'], ctx)
