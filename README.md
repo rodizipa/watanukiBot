@@ -8,10 +8,10 @@ You need to set a CONFIG.PY file in the root folder with the following fields:
 PREFIX = ""
 TOKEN = ""
 
-# Increment example
+//Increment example
 TIME_INCREMENT_IN_MINUTES = 10 
 
-# PostgreSQL config production
+//PostgreSQL config production
 USERNAME = ''
 PASSWORD = ''
 DATABASE = ''
