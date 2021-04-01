@@ -3,6 +3,7 @@ import logging
 import discord
 import asyncpg
 import pendulum
+from cogs.primeiroAbril import on_join_or_nick_update
 from helpers.datetimeutil import pendulum_to_datetime
 from discord.ext import commands
 
@@ -75,7 +76,7 @@ class Bot(commands.Bot):
     async def on_member_join(self, member):
         cog_april = await self.get_april_cog()
         if cog_april:
-            await cog_april.on_join_or_nick_update(cog_april, member)
+            await on_join_or_nick_update(cog_april, member)
 
     # Todo: Também verificar evento de entrada no servidor e talvez executar a cada X min
 
