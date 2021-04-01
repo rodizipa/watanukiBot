@@ -35,9 +35,9 @@ class Bot(commands.Bot):
         return self.get_cog("PrimeiroAbrilCog")
 
     async def reset_task(self):
+        await self.wait_until_ready()
         while not self.is_closed():
             now = pendulum.now()
-
             for guild in await self.guildservice.get_active_guilds():
                 if guild['next_update'] and now > pendulum.instance(guild['next_update']):
                     april_cog = await self.get_april_cog()
