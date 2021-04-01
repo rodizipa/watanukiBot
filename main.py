@@ -42,9 +42,10 @@ class Bot(commands.Bot):
             for guild in await self.guildservice.get_active_guilds():
                 if guild['next_update'] and now > pendulum.instance(guild['next_update']):
                     april_cog = await self.get_april_cog()
-                    await april_cog.watanuki_primeiro_de_abril(guild=self.get_guild(guild['guild_id']))
                     await self.guildservice.update_time(guild['guild_id'], pendulum_to_datetime(
                         pendulum.now().add(minutes=CONFIG.TIME_INCREMENT_IN_MINUTES)))
+                    await april_cog.watanuki_primeiro_de_abril(guild=self.get_guild(guild['guild_id']))
+                    await asyncio.sleep(0)
             await asyncio.sleep(60)
 
     @property

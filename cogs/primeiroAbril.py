@@ -257,6 +257,7 @@ class PrimeiroAbrilCog(commands.Cog):
 
         async for member in ctx.guild.fetch_members():
             await self.register_member(member, ctx.guild.id)
+            await asyncio.sleep(0)
         print("Usuários salvos com sucesso.")
         await asyncio.sleep(1)
         await ctx.message.delete()
@@ -271,6 +272,7 @@ class PrimeiroAbrilCog(commands.Cog):
             nome = random.choice(pool_nicks)
             pool_nicks.remove(nome)
             await change_member_nick(member, nome, ctx=ctx)
+            await asyncio.sleep(0)
         print("Watanuki watanuki primeiro de abril!")
         await self.bot.guildservice.update_guild_online(guild.id, True)
         await asyncio.sleep(1)
@@ -287,8 +289,8 @@ class PrimeiroAbrilCog(commands.Cog):
 
         for member in membros:
             await change_member_nick(member['member_id'], member['display_name'], ctx)
+            await asyncio.sleep(0)
         print("Usuários restaurados com sucesso")
-        await self.bot.guildservice.update_guild_online(ctx.guild.id, False)
         await asyncio.sleep(1)
         await ctx.message.delete()
 
