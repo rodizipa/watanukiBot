@@ -21,5 +21,9 @@ class GuildService(DatabaseService):
     async def update_time(self, guild_id, time):
         return await self.execute("update guild set next_update = $1 where guild_id = $2", time, guild_id)
 
+    async def get_reset(self, guild_id):
+        reset = await self.fetchrow("select next_update from guild where guild_id = $1", guild_id)
+        return reset['next_update']
+
     async def update_guild_online(self, guild_id, value: bool):
         await self.execute("update guild set event_online = $1 where guild_id = $2", value, guild_id)

@@ -267,11 +267,8 @@ class PrimeiroAbrilCog(commands.Cog):
     async def watanuki_primeiro_de_abril(self, ctx=None, guild=None):
         """Altera o nome dos usuários"""
         guild = ctx.guild if ctx else guild
-        pool_nicks = list(nicks)
         async for member in guild.fetch_members():
-            nome = random.choice(pool_nicks)
-            pool_nicks.remove(nome)
-            await change_member_nick(member, nome, ctx=ctx)
+            await change_member_nick(member, random.choice(nicks), ctx=ctx)
             await asyncio.sleep(0)
         print("Watanuki watanuki primeiro de abril!")
         await self.bot.guildservice.update_guild_online(guild.id, True)
@@ -294,6 +291,16 @@ class PrimeiroAbrilCog(commands.Cog):
         await asyncio.sleep(1)
         await ctx.message.delete()
 
+    @commands.command(name="reset")
+    async def reset(self, ctx):
+        now = pendulum.now()
+        reset = pendulum.instance(await self.bot.guildservice.get_reset(ctx.guild.id))
+        resetcd = reset.diff(now)
+        em = discord.Embed(description=f":alarm_clock: O próximo reset irá a contecer em {resetcd.as_interval()}. :alarm_clock:")
+        m = await ctx.send(embed=em)
+        await asyncio.sleep(10)
+        await ctx.message.delete()
+        await m.delete()
 
 def setup(bot):
     bot.add_cog(PrimeiroAbrilCog(bot))
